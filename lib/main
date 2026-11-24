@@ -1,31 +1,29 @@
-name: Build Flutter APK
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'state/app_state.dart';
+import 'screens/some_shell.dart';
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(const GununApp());
+}
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - uses: subosito/flutter-action@v2
-        with:
-          channel: 'stable'
-      - name: Preserve lib and create android files
-        run: |
-          cp -r lib /tmp/lib_backup
-          flutter create . --platforms=android
-          rm -rf lib
-          mv /tmp/lib_backup lib
-      - run: flutter pub get
-      - run: flutter build apk --release
-      - uses: actions/upload-artifact@v4
-        with:
-          name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+class GununApp extends StatelessWidget {
+  const GununApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => AppState(),
+      child: MaterialApp(
+        title: 'Günün',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.indigo),
+          useMaterial3: true,
+        ),
+        home: const SomeShell(),
+      ),
+    );
+  }
+}
