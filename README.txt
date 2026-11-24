@@ -1,9 +1,11 @@
 GUNUN SORUSU - Flutter (Android)
 
-1) Bu klasoru GitHub reposuna yukle (zip'i ac, icindekileri yukle).
-2) CodeMagic'te repoyu bagla. codemagic.yaml otomatik algilanir.
-   Pipeline once android/ klasorunu olusturur (flutter create), sonra APK derler.
-3) Yerelde calistirmak icin: klasorde `flutter create . --platforms=android` bir kez, sonra `flutter run`.
+1) Zip'i ac, ICINDEKI TUM dosyalari (gizli olanlar dahi: .github ve .gitignore) GitHub reposunun
+   ana dizinine yukle. pubspec.yaml reponun kokunde olmali.
+2) GitHub > Actions sekmesinde "APK Olustur" calisir. Bitince "app-release" artifact'ini indir.
+   (CodeMagic kullanirsan codemagic.yaml otomatik algilanir.)
+3) Yerelde calistirmak icin: klasorde `flutter create . --platforms=android --project-name gunun_sorusu`
+   bir kez, sonra `flutter run`.
 
 Soru eklemek icin: uygulamada "Sorular" sekmesi > "Soru Ekle"
 veya lib/data/builtin_questions.dart dosyasina elle ekle.
